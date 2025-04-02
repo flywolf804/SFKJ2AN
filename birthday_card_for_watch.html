@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+        body {
+            background: radial-gradient(circle, #ffb6c1, #ffd700);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: red;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        #message {
+            font-family: YouYuan;
+            font-size: 16px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        #image {
+            width: 150px;
+            height: auto;
+        }
+
+        .falling {
+            position: absolute;
+            top: -50px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                top: 100vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Happy Birthday!</h1>
+    <div id="message"  style="color: blue; font-size: 16px; font-Weight: bold">思琪，在这最美好的日子，爸爸妈妈想要对你说：</div>
+
+
+    <img id="image" src="https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/6a30c75a0b0b77cb595a1b3362796d3b_1741678103707880520.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773214103&x-signature=5jO6t3cI6T8Ksk9oeiKTkDnP%2BOY%3D" alt="Birthday Image">
+    
+    <script>
+
+        function calculateBirthdayInfo(birthDateStr) {
+            // 将输入的字符串转换为日期对象
+            const birthDate = new Date(birthDateStr);
+            // 获取当前日期
+            const currentDate = new Date();
+
+            // 计算年龄
+            let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+            return age;
+            }
+        
+        // 示例使用
+        const birthDateStr = '2013-04-28';
+        const age = calculateBirthdayInfo(birthDateStr);
+
+        const emojis = ['💖', '🎈', '⭐', '🍰','🧨','💰','🥰'];
+        const messages = [
+            "今天你 " + age + " 岁啦，祝你生日快乐！",
+            "爸爸妈妈也很开心迎来这个特别的日子！",
+            "回首过去的 " + age + "年，虽有辛苦，但快乐常伴！",
+            "你成长得如此优秀，学习成绩优异！",
+            "你羽毛球赛场拼搏也摘得奖牌无数！",
+            "你绘画屡获佳绩，唱歌也动听！",
+            "你在爸妈心中你永远是最棒的！",
+            "愿你努力奋进、开心常伴、茁壮成长！",
+            "祝生日快乐，永远的安安宝宝！",
+            "愿未来的岁岁年年，追逐梦想永不止步！",
+            "爸爸妈妈永远爱你！",
+            "爸妈会永远在你身边支持你！",
+            "愿你往后每一天都充满阳光和欢笑，自信快乐一辈子！"
+            ]
+        const messageElement = document.getElementById('message');
+
+        document.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            messageElement.textContent = messages[randomIndex];
+            messageElement.style.color = 'blue';
+            messageElement.style.fontSize = '15px'; // 调整字体大小
+            messageElement.style.fontWeight = 'bold'; // 调整字体粗细
+            messageElement.style.animation = 'pulse 0.5s infinite alternate'; // 添加动画效果        
+            });
+
+        function createFallingEmoji() {
+            if (Math.random() > 0.7) {
+                const emoji = document.createElement('span');
+                emoji.classList.add('falling');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(emoji);
+
+                setTimeout(() => {
+                    document.body.removeChild(emoji);
+                }, 5000);
+            }
+        }
+
+        setInterval(createFallingEmoji, 1000);
+
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.9) {
+                const cake = document.createElement('span');
+                cake.classList.add('falling');
+                cake.textContent = '🍰';
+                cake.style.left = e.clientX + 'px';
+                cake.style.top = e.clientY + 'px';
+                cake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(cake);
+
+                setTimeout(() => {
+                    document.body.removeChild(cake);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>
+    
